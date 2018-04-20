@@ -1,16 +1,21 @@
 import * as React from 'react'
+import styled from '../../my-styled-components'
 
-interface ILayoutProps {
+interface IlayoutProps {
   name?: string
 }
 
-const Layout: React.SFC<ILayoutProps> = props => {
+const MainContainer = styled.main`
+  margin-top: 16px;
+`
+
+const layout: React.SFC<IlayoutProps> = props => {
   return (
     <>
       <div>Toolbar, sidedrawer,backdrop</div>
-      <main>{props.children}</main>
+      <MainContainer>{props.children}</MainContainer>
     </>
   )
 }
 
-export default Layout
+export default layout
