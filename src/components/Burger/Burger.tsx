@@ -48,13 +48,10 @@ const addToArray = (igType: ingredientType, num: number, arr: any[]) => {
 const burger: React.SFC<IburgerProps> = props => {
   // takes the ingredients object from props and split it into arrays of ingredient
   // Object.keys(props.ingredients): take the keys of an object
-  let burgerIngredients: JSX.Element[] | JSX.Element = Object.keys(props.ingredients).reduce((arr: any[], igType: ingredientType) => {
+  const burgerIngredients: JSX.Element[] | JSX.Element = Object.keys(props.ingredients).reduce((arr: any[], igType: ingredientType) => {
     addToArray(igType, props.ingredients[igType], arr)
     return arr
   }, [])
-  if (burgerIngredients.length <= 0) {
-    burgerIngredients = <p>Please select a ingredient</p>
-  }
 
   return (
     <Burger>
