@@ -66,23 +66,32 @@ export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, 
     })
   }
 
-  public toglePurchase = () => {
+  public togglePurchase = () => {
     this.setState(prevState => {
       const prevPurchasing = prevState.purchasing
       return { purchasing: !prevPurchasing }
     })
   }
 
+  public handlePurchaseContinue = () => {
+    alert('Purchase Continue')
+  }
+
   public render() {
     return (
       <>
-        <Modal purchasing={this.state.purchasing} togglePurchase={this.toglePurchase}>
-          <OrderSummary ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} />
+        <Modal purchasing={this.state.purchasing} togglePurchase={this.togglePurchase}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            totalPrice={this.state.totalPrice}
+            continuePurchase={this.handlePurchaseContinue}
+            cancelPurchase={this.togglePurchase}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuilControls
           purchasing={this.state.purchasing}
-          toglePurchase={this.toglePurchase}
+          toglePurchase={this.togglePurchase}
           totalPrice={this.state.totalPrice}
           ingredients={this.state.ingredients}
           addIngredient={(t: ingredientType) => this.handleAddIngredient(t)}

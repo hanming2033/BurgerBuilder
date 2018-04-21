@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { IBurgerBuilderState } from '../../containers/BurgerBuilder'
 import styled from '../../my-styled-components'
+import Button from '../../UI-Elements/Button'
 
 interface IOrderSummaryProps extends IBurgerBuilderState {
-  tmp?: string
+  continuePurchase: () => void
+  cancelPurchase: () => void
 }
 
 const IngredientListItem = styled.li`
@@ -27,6 +29,12 @@ const OrderSummary: React.SFC<IOrderSummaryProps> = props => {
       <p>A delicious burger with the below ingredients:</p>
       <ul>{ingredientSummary}</ul>
       <p>Continue to Checkout</p>
+      <Button danger onClick={props.cancelPurchase}>
+        Cancel
+      </Button>
+      <Button success onClick={props.continuePurchase}>
+        Continue
+      </Button>
     </>
   )
 }
