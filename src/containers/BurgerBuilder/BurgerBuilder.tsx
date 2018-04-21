@@ -17,10 +17,10 @@ export interface IBurgerBuilderState {
 export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, IBurgerBuilderState> {
   public state = {
     ingredients: {
-      salad: 1,
-      bacon: 1,
-      cheese: 3,
-      meat: 1
+      salad: 0,
+      bacon: 0,
+      cheese: 0,
+      meat: 0
     }
   }
 
