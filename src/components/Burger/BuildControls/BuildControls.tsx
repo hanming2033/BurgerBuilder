@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from '../../../my-styled-components'
+import styled, { keyframes } from '../../../my-styled-components'
 import BuildControl from './BuildControl'
 import { ingredientType } from '../BurgerIngredient'
 import { IBurgerBuilderState } from '../../../containers/BurgerBuilder'
@@ -23,8 +23,18 @@ const MainControls = styled.div`
 const PriceParagraph = styled.p`
   font-weight: bold;
 `
-
-const ModalButton = styled.button`
+const enable = keyframes`
+  0% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+`
+const OrderButton = styled.button`
   background-color: #dad735;
   outline: none;
   cursor: pointer;
@@ -34,6 +44,24 @@ const ModalButton = styled.button`
   font-size: 1.2em;
   padding: 15px 30px;
   box-shadow: 2px 2px 2px #966909;
+
+  &:hover,
+  &:active {
+    background-color: #a0db41;
+    border: 1px solid #966909;
+    color: #966909;
+  }
+
+  &:disabled {
+    background-color: #c7c6c6;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+    color: #888888;
+  }
+
+  &:not(:disabled) {
+    animation: ${enable} 0.3s linear;
+  }
 `
 
 // BuildControls data optional
@@ -60,7 +88,7 @@ const buildControls: React.SFC<IbuildControlsProps> = props => {
     <MainControls>
       <PriceParagraph>Current Price : ${props.totalPrice.toFixed(2)}</PriceParagraph>
       {createBuildControls(buildContolsData)}
-      <ModalButton>ORDER NOW</ModalButton>
+      <OrderButton>ORDER NOW</OrderButton>
     </MainControls>
   )
 }
