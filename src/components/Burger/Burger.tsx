@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from '../../my-styled-components'
-import BurgerIngredient, { ingredientType } from './BurgerIngredient/BurgerIngredient'
+import BurgerIngredient, { ingredientType } from './BurgerIngredient'
 
 interface IburgerProps {
   ingredients: {

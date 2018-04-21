@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Burger from '../../components/Burger/Burger'
+import Burger from '../components/Burger/Burger'
 
 export interface IBurgerBuilderProps {
   a?: string

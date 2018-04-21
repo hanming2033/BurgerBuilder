@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from '../../../my-styled-components'
+import styled from '../../my-styled-components'
 
 export type ingredientType = 'bread-bottom' | 'bread-top' | 'meat' | 'cheese' | 'salad' | 'bacon'
 
