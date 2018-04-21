@@ -3,6 +3,7 @@ import Burger from '../components/Burger/Burger'
 import BuilControls from '../components/Burger/BuildControls/BuildControls'
 import { ingredientType } from '../components/Burger/BurgerIngredient'
 import Modal from '../UI-Elements/Modal'
+import OrderSummary from '../components/Burger/OrderSummary'
 
 export interface IBurgerBuilderProps {
   a?: string
@@ -16,6 +17,7 @@ export interface IBurgerBuilderState {
     meat: number
   }
   totalPrice: number
+  purchasing?: boolean
 }
 
 const INGREDIENT_PRICES = {
@@ -40,7 +42,7 @@ export const MIN_NUMBER = {
 }
 
 export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, IBurgerBuilderState> {
-  public state = { ingredients: { salad: 1, bacon: 1, cheese: 1, meat: 1 }, totalPrice: 6.8 }
+  public state = { ingredients: { salad: 1, bacon: 1, cheese: 1, meat: 1 }, totalPrice: 6.8, purchasing: false }
 
   public handleAddIngredient = (igType: ingredientType) => {
     this.setState(prevState => {
@@ -64,12 +66,23 @@ export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, 
     })
   }
 
+  public toglePurchase = () => {
+    this.setState(prevState => {
+      const prevPurchasing = prevState.purchasing
+      return { purchasing: !prevPurchasing }
+    })
+  }
+
   public render() {
     return (
       <>
-        <Modal />
+        <Modal purchasing={this.state.purchasing} togglePurchase={this.toglePurchase}>
+          <OrderSummary ingredients={this.state.ingredients} totalPrice={this.state.totalPrice} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuilControls
+          purchasing={this.state.purchasing}
+          toglePurchase={this.toglePurchase}
           totalPrice={this.state.totalPrice}
           ingredients={this.state.ingredients}
           addIngredient={(t: ingredientType) => this.handleAddIngredient(t)}

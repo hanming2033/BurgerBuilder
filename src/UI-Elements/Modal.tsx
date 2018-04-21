@@ -1,11 +1,16 @@
 import * as React from 'react'
 import styled from '../my-styled-components'
+import BackDrop from './Backdrop'
 
 interface ImodalProps {
-  tmp?: string
+  purchasing: boolean
+  togglePurchase: () => void
 }
 
 const Wrapper = styled.div`
+  transform: ${(props: Partial<ImodalProps>) => (props.purchasing ? 'translateY(0)' : 'translateY(-100vh)')};
+  opacity: ${(props: Partial<ImodalProps>) => (props.purchasing ? '1' : '0')};
+  position: fixed;
   position: fixed;
   z-index: 500;
   background-color: white;
@@ -24,7 +29,12 @@ const Wrapper = styled.div`
 `
 
 const modal: React.SFC<ImodalProps> = props => {
-  return <Wrapper>{props.children}</Wrapper>
+  return (
+    <>
+      <Wrapper purchasing={props.purchasing}>{props.children}</Wrapper>
+      <BackDrop show={props.purchasing} hide={props.togglePurchase} />
+    </>
+  )
 }
 
 export default modal

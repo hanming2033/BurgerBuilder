@@ -7,6 +7,7 @@ import { IBurgerBuilderState } from '../../../containers/BurgerBuilder'
 interface IbuildControlsProps extends IBurgerBuilderState {
   addIngredient: (igType: ingredientType) => void
   removeIngredient: (igType: ingredientType) => void
+  toglePurchase: () => void
 }
 
 const MainControls = styled.div`
@@ -88,7 +89,7 @@ const buildControls: React.SFC<IbuildControlsProps> = props => {
     <MainControls>
       <PriceParagraph>Current Price : ${props.totalPrice.toFixed(2)}</PriceParagraph>
       {createBuildControls(buildContolsData)}
-      <OrderButton>ORDER NOW</OrderButton>
+      <OrderButton onClick={props.toglePurchase}>ORDER NOW</OrderButton>
     </MainControls>
   )
 }
