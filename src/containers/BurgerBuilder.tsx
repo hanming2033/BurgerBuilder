@@ -2,6 +2,7 @@ import * as React from 'react'
 import Burger from '../components/Burger/Burger'
 import BuilControls from '../components/Burger/BuildControls/BuildControls'
 import { ingredientType } from '../components/Burger/BurgerIngredient'
+import Modal from '../UI-Elements/Modal'
 
 export interface IBurgerBuilderProps {
   a?: string
@@ -39,10 +40,7 @@ export const MIN_NUMBER = {
 }
 
 export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, IBurgerBuilderState> {
-  public state = {
-    ingredients: { salad: 1, bacon: 1, cheese: 1, meat: 1 },
-    totalPrice: 6.8
-  }
+  public state = { ingredients: { salad: 1, bacon: 1, cheese: 1, meat: 1 }, totalPrice: 6.8 }
 
   public handleAddIngredient = (igType: ingredientType) => {
     this.setState(prevState => {
@@ -69,6 +67,7 @@ export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, 
   public render() {
     return (
       <>
+        <Modal />
         <Burger ingredients={this.state.ingredients} />
         <BuilControls
           totalPrice={this.state.totalPrice}
