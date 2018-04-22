@@ -1,7 +1,9 @@
 import * as React from 'react'
-import styled from '../../../my-styled-components'
+import styled from 'styled-components'
 import { IBurgerBuilderState, MIN_NUMBER, MAX_NUMBER } from '../../../containers/BurgerBuilder'
 import { ingredientType } from '../BurgerIngredient'
+import IconButton from 'material-ui/IconButton'
+import Icon from 'material-ui/Icon'
 
 interface IbuildControlProps extends Partial<IBurgerBuilderState> {
   label: string
@@ -19,45 +21,7 @@ const BuildControl = styled.div`
 
 const Label = styled.div`
   padding: 10px;
-  font-weight: bold;
   width: 80px;
-`
-
-interface Ibutton {
-  More?: boolean
-  Less?: boolean
-}
-
-const Button = styled.button`
-  color: white;
-  display: block;
-  font: inherit;
-  padding: 5px;
-  margin: 0 5px;
-  width: 80px;
-  border: 1px solid #aa6817;
-  cursor: pointer;
-  outline: none;
-
-  background-color: ${(p: Ibutton) => (p.Less ? '#D39952' : '#8F5E1E')};
-
-  &:hover,
-  &active {
-    background-color: ${(p: Ibutton) => (p.Less ? '#DAA972' : '#99703F')};
-  }
-
-  &:disabled {
-    background-color: #ac9980;
-    border: 1px solid #7e7365;
-    color: #ccc;
-    cursor: default;
-  }
-
-  &:hover:disabled {
-    background-color: #ac9980;
-    color: #ccc;
-    cursor: not-allowed;
-  }
 `
 
 const buildControl: React.SFC<IbuildControlProps> = props => {
@@ -67,12 +31,12 @@ const buildControl: React.SFC<IbuildControlProps> = props => {
   return (
     <BuildControl>
       <Label>{props.label}</Label>
-      <Button onClick={props.removeIngredient} Less disabled={disableRemove}>
-        -
-      </Button>
-      <Button onClick={props.addIngredient} More disabled={disableAdd}>
-        +
-      </Button>
+      <IconButton onClick={props.removeIngredient} disabled={disableRemove}>
+        <Icon>remove_circle</Icon>
+      </IconButton>
+      <IconButton onClick={props.addIngredient} disabled={disableAdd}>
+        <Icon>add_circle</Icon>
+      </IconButton>
     </BuildControl>
   )
 }

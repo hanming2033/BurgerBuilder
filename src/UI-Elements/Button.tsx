@@ -1,10 +1,8 @@
-import styled from '../my-styled-components'
-import { IThemeInterface } from '../theme'
+import styled from 'styled-components'
 
 export interface IButtonProps {
   success?: boolean
   danger?: boolean
-  theme?: IThemeInterface
 }
 
 const Button = styled.button`

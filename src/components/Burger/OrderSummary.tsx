@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { IBurgerBuilderState } from '../../containers/BurgerBuilder'
-import styled from '../../my-styled-components'
+import styled from 'styled-components'
 import Button from '../../UI-Elements/Button'
 
 interface IOrderSummaryProps extends IBurgerBuilderState {

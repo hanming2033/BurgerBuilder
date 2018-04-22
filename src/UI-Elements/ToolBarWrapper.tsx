@@ -1,4 +1,4 @@
-import styled from '../my-styled-components'
+import styled from 'styled-components'
 
 const ToolBarWrapper = styled.div`
   height: 56px;

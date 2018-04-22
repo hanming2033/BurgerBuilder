@@ -1,8 +1,9 @@
 import * as React from 'react'
-import styled, { keyframes } from '../../../my-styled-components'
+import styled from 'styled-components'
 import BuildControl from './BuildControl'
 import { ingredientType } from '../BurgerIngredient'
 import { IBurgerBuilderState } from '../../../containers/BurgerBuilder'
+import Button from 'material-ui/Button'
 
 interface IbuildControlsProps extends IBurgerBuilderState {
   addIngredient: (igType: ingredientType) => void
@@ -23,46 +24,6 @@ const MainControls = styled.div`
 
 const PriceParagraph = styled.p`
   font-weight: bold;
-`
-const enable = keyframes`
-  0% {
-        transform: scale(1);
-    }
-    60% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-`
-const OrderButton = styled.button`
-  background-color: #dad735;
-  outline: none;
-  cursor: pointer;
-  border: 1px solid #966909;
-  color: #966909;
-  font-family: inherit;
-  font-size: 1.2em;
-  padding: 15px 30px;
-  box-shadow: 2px 2px 2px #966909;
-
-  &:hover,
-  &:active {
-    background-color: #a0db41;
-    border: 1px solid #966909;
-    color: #966909;
-  }
-
-  &:disabled {
-    background-color: #c7c6c6;
-    cursor: not-allowed;
-    border: 1px solid #ccc;
-    color: #888888;
-  }
-
-  &:not(:disabled) {
-    animation: ${enable} 0.3s linear;
-  }
 `
 
 // BuildControls data optional
@@ -89,7 +50,9 @@ const buildControls: React.SFC<IbuildControlsProps> = props => {
     <MainControls>
       <PriceParagraph>Current Price : ${props.totalPrice.toFixed(2)}</PriceParagraph>
       {createBuildControls(buildContolsData)}
-      <OrderButton onClick={props.toglePurchase}>ORDER NOW</OrderButton>
+      <Button variant="raised" size="large" color="secondary" onClick={props.toglePurchase}>
+        ORDER NOW
+      </Button>
     </MainControls>
   )
 }

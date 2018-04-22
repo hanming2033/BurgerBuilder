@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from '../../my-styled-components'
+import styled from 'styled-components'
 import ToolBar from '../Navigation/Toolbar'
 import SideDrawer from '../Navigation/SideDrawer'
 

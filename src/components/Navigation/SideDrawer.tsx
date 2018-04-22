@@ -2,7 +2,7 @@ import * as React from 'react'
 import Logo from '../Logo/Logo'
 import NavigationItems from './NavigationItems'
 import Nav from '../../UI-Elements/Nav'
-import styled from '../../my-styled-components'
+import styled from 'styled-components'
 
 interface ISideDrawerProps {
   showMenu?: boolean
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 const SideDrawer: React.SFC<ISideDrawerProps> = props => {
   return (
     <Wrapper showMenu={props.showMenu}>
-      <Logo height="50px" />
+      <Logo height="11%" />
       <Nav>
         <NavigationItems />
       </Nav>
