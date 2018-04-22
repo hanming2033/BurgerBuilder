@@ -1,39 +1,45 @@
 import * as React from 'react'
 import Logo from '../Logo/Logo'
-import NavigationItems from './NavigationItems'
-import Nav from '../../UI-Elements/Nav'
-import styled from 'styled-components'
+// import NavigationItems from './NavigationItems'
+// import Nav from '../../UI-Elements/Nav'
+// import styled from 'styled-components'
+
+import Drawer from 'material-ui/Drawer'
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
+import Icon from 'material-ui/Icon'
 
 interface ISideDrawerProps {
   showMenu?: boolean
+  closeSideMenu: () => void
 }
 
-const Wrapper = styled.div`
-  position: fixed;
-  width: 280px;
-  max-width: 70%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 400;
-  background-color: white;
-  padding: 32px 16px;
-  transform: ${(p: { showMenu?: boolean }) => (p.showMenu ? 'translateX(0)' : 'translateY(-100%)')};
-  transition: transform 0.3s ease-out;
-
-  @media (min-width: 500px) {
-    display: none;
-  }
-`
+const sideList = (
+  <div>
+    <List component="nav">
+      <Logo height="60px" />
+      <ListItem button>
+        <ListItemIcon>
+          <Icon>create</Icon>
+        </ListItemIcon>
+        <ListItemText primary="Burger Builder" />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+          <Icon>shopping_cart</Icon>
+        </ListItemIcon>
+        <ListItemText primary="Cart" />
+      </ListItem>
+    </List>
+  </div>
+)
 
 const SideDrawer: React.SFC<ISideDrawerProps> = props => {
   return (
-    <Wrapper showMenu={props.showMenu}>
-      <Logo height="11%" />
-      <Nav>
-        <NavigationItems />
-      </Nav>
-    </Wrapper>
+    <Drawer open={props.showMenu} onClose={props.closeSideMenu}>
+      <div tabIndex={0} role="button" onClick={props.closeSideMenu} onKeyDown={props.closeSideMenu}>
+        {sideList}
+      </div>
+    </Drawer>
   )
 }
 

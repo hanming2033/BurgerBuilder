@@ -1,24 +1,34 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import ToolBar from '../Navigation/Toolbar'
+import TopNav from '../Navigation/TopNav'
 import SideDrawer from '../Navigation/SideDrawer'
-
-interface IlayoutProps {
-  name?: string
-}
 
 const MainContainer = styled.main`
   margin-top: 70px;
 `
 
-const layout: React.SFC<IlayoutProps> = props => {
-  return (
-    <>
-      <ToolBar />
-      <SideDrawer showMenu />
-      <MainContainer>{props.children}</MainContainer>
-    </>
-  )
+interface ILayoutState {
+  showSideMenu: boolean
 }
 
-export default layout
+class Layout extends React.Component<{}, ILayoutState> {
+  public state = {
+    showSideMenu: false
+  }
+
+  public toggleSideMenu = () => {
+    this.setState(prevState => ({ showSideMenu: !prevState.showSideMenu }))
+  }
+
+  public render() {
+    return (
+      <>
+        <TopNav openSideMenu={this.toggleSideMenu} />
+        <SideDrawer showMenu={this.state.showSideMenu} closeSideMenu={this.toggleSideMenu} />
+        <MainContainer>{this.props.children}</MainContainer>
+      </>
+    )
+  }
+}
+
+export default Layout

@@ -13,7 +13,7 @@ interface IbuildControlsProps extends IBurgerBuilderState {
 
 const MainControls = styled.div`
   width: 100%;
-  background-color: #cf8f2e;
+  background-color: #3f97f6;
   display: flex;
   flex-flow: column;
   align-items: center;

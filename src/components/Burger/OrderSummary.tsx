@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { IBurgerBuilderState } from '../../containers/BurgerBuilder'
 import styled from 'styled-components'
-import Button from '../../UI-Elements/Button'
+import Button from 'material-ui/Button'
 
 interface IOrderSummaryProps extends IBurgerBuilderState {
   continuePurchase: () => void
@@ -29,10 +29,10 @@ const OrderSummary: React.SFC<IOrderSummaryProps> = props => {
       <p>A delicious burger with the below ingredients:</p>
       <ul>{ingredientSummary}</ul>
       <p>Continue to Checkout</p>
-      <Button danger onClick={props.cancelPurchase}>
+      <Button color="primary" onClick={props.cancelPurchase}>
         Cancel
       </Button>
-      <Button success onClick={props.continuePurchase}>
+      <Button color="secondary" onClick={props.continuePurchase}>
         Continue
       </Button>
     </>

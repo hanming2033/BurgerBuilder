@@ -10,6 +10,7 @@ interface ILogoProps {
 const Background = styled.div`
   padding: 8px;
   height: ${(p: ILogoProps) => (p.height ? p.height : '80%')};
+  text-align: center;
 `
 
 const Image = styled.img`

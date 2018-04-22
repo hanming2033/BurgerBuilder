@@ -6,7 +6,7 @@ const ToolBarWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #703b09;
+  background-color: #3f97f6;
   display: flex;
   justify-content: space-between;
   align-items: center;
