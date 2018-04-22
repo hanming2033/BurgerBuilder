@@ -1,18 +1,21 @@
 import * as React from 'react'
 import styled from '../../my-styled-components'
+import ToolBar from '../Navigation/Toolbar'
+import SideDrawer from '../Navigation/SideDrawer'
 
 interface IlayoutProps {
   name?: string
 }
 
 const MainContainer = styled.main`
-  margin-top: 16px;
+  margin-top: 70px;
 `
 
 const layout: React.SFC<IlayoutProps> = props => {
   return (
     <>
-      <div>Toolbar, sidedrawer,backdrop</div>
+      <ToolBar />
+      <SideDrawer showMenu />
       <MainContainer>{props.children}</MainContainer>
     </>
   )
