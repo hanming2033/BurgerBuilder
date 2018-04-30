@@ -10,6 +10,7 @@ import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 interface ITopNavProps {
   openSideMenu: () => void
@@ -40,8 +41,12 @@ const TopNav: React.SFC<ITopNavProps> = props => {
         </Typography>
         <Logo height="40px" />
         <EmptyDiv />
-        <ResponsiveButton color="inherit">Burger Builder</ResponsiveButton>
-        <ResponsiveButton color="inherit">Cart</ResponsiveButton>
+        <NavLink activeStyle={{ color: 'pink' }} style={{ color: 'white', textDecoration: 'none' }} to="/burgerbuilder">
+          <ResponsiveButton color="inherit">Burger Builder</ResponsiveButton>
+        </NavLink>
+        <NavLink activeStyle={{ color: 'pink' }} style={{ color: 'white', textDecoration: 'none' }} to="/orders">
+          <ResponsiveButton color="inherit">Orders</ResponsiveButton>
+        </NavLink>
       </Toolbar>
     </AppBar>
   )

@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.42",
+    "@types/react-router-dom": "^4.2.6",
+    "axios": "^0.18.0",
     "material-ui": "^1.0.0-beta.42",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-router-dom": "^4.2.2",
     "react-scripts-ts": "2.15.1",
     "styled-components": "^3.2.6",
     "styled-material-components": "0.0.51"

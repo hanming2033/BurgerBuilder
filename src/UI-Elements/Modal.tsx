@@ -5,6 +5,7 @@ import BackDrop from './Backdrop'
 interface IModalProps {
   purchasing: boolean
   togglePurchase: () => void
+  loading: boolean
 }
 
 const Wrapper = styled.div`
@@ -30,7 +31,7 @@ const Wrapper = styled.div`
 
 class Modal extends React.Component<IModalProps, {}> {
   public shouldComponentUpdate(nextProps: IModalProps) {
-    return nextProps.purchasing !== this.props.purchasing
+    return nextProps.purchasing !== this.props.purchasing || nextProps.loading !== this.props.loading
   }
 
   public render() {

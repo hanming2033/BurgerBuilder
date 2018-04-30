@@ -4,20 +4,21 @@ import BuilControls from '../components/Burger/BuildControls/BuildControls'
 import { ingredientType } from '../components/Burger/BurgerIngredient'
 import Modal from '../UI-Elements/Modal'
 import OrderSummary from '../components/Burger/OrderSummary'
+import orderAxios from '../axios-order'
+import withErrorHandler from '../withErrorHandler'
+import { CircularProgress } from 'material-ui/Progress'
+import { IburgerProps } from '../components/Burger/Burger'
+import { RouteComponentProps } from 'react-router-dom'
 
 export interface IBurgerBuilderProps {
-  a?: string
+  _?: string
 }
 
-export interface IBurgerBuilderState {
-  ingredients: {
-    salad: number
-    bacon: number
-    cheese: number
-    meat: number
-  }
+export interface IBurgerBuilderState extends IburgerProps {
   totalPrice: number
   purchasing?: boolean
+  loading: boolean
+  error?: boolean
 }
 
 const INGREDIENT_PRICES = {
@@ -41,8 +42,26 @@ export const MIN_NUMBER = {
   bacon: 0
 }
 
-export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, IBurgerBuilderState> {
-  public state = { ingredients: { salad: 1, bacon: 1, cheese: 1, meat: 1 }, totalPrice: 6.8, purchasing: false }
+class BurgerBuilder extends React.Component<IBurgerBuilderProps & RouteComponentProps<{}>, IBurgerBuilderState> {
+  public state = {
+    ingredients: { salad: 0, bacon: 0, cheese: 0, meat: 0 },
+    totalPrice: 6.8,
+    purchasing: false,
+    loading: false,
+    error: false
+  }
+
+  public componentDidMount() {
+    orderAxios
+      .get('https://react-burger-builder-8b532.firebaseio.com/ingredients.json')
+      .then(res => {
+        this.setState({ ingredients: res.data })
+        return res
+      })
+      .catch(err => {
+        this.setState({ error: true })
+      })
+  }
 
   public handleAddIngredient = (igType: ingredientType) => {
     this.setState(prevState => {
@@ -74,22 +93,24 @@ export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, 
   }
 
   public handlePurchaseContinue = () => {
-    alert('Purchase Continue')
+    // this.setState({ loading: true })
+    const queryParam = []
+    for (const i in this.state.ingredients) {
+      if (this.state.ingredients.hasOwnProperty(i)) {
+        queryParam.push(`${i}=${this.state.ingredients[i]}`)
+      }
+    }
+    queryParam.push(`price=${this.state.totalPrice}`)
+    const queryString = queryParam.join('&')
+    this.props.history.push({ pathname: '/cart', search: `?${queryString}` })
   }
 
   public render() {
-    return (
+    let burger = (
       <>
-        <Modal purchasing={this.state.purchasing} togglePurchase={this.togglePurchase}>
-          <OrderSummary
-            ingredients={this.state.ingredients}
-            totalPrice={this.state.totalPrice}
-            continuePurchase={this.handlePurchaseContinue}
-            cancelPurchase={this.togglePurchase}
-          />
-        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuilControls
+          loading={this.state.loading}
           purchasing={this.state.purchasing}
           toglePurchase={this.togglePurchase}
           totalPrice={this.state.totalPrice}
@@ -99,5 +120,24 @@ export default class BurgerBuilder extends React.Component<IBurgerBuilderProps, 
         />
       </>
     )
+    burger = this.state.ingredients.meat === 0 ? <CircularProgress size={50} /> : burger
+    burger = this.state.error ? <p>App Failed. Mother Fucker!!</p> : burger
+
+    return (
+      <>
+        <Modal purchasing={this.state.purchasing} togglePurchase={this.togglePurchase} loading={this.state.loading}>
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            totalPrice={this.state.totalPrice}
+            continuePurchase={this.handlePurchaseContinue}
+            cancelPurchase={this.togglePurchase}
+            loading={this.state.loading}
+          />
+        </Modal>
+        {burger}
+      </>
+    )
   }
 }
+
+export default withErrorHandler(BurgerBuilder, orderAxios)

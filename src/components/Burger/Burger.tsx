@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import BurgerIngredient, { ingredientType } from './BurgerIngredient'
 
-interface IburgerProps {
+export interface IburgerProps {
   ingredients: {
     salad?: number
     bacon?: number
@@ -14,7 +14,7 @@ interface IburgerProps {
 const Burger = styled.div`
   width: 100%;
   margin: auto;
-  height: calc(100vw * 0.9);
+  height: 90%;
   /* overflow: scroll; */
   text-align: center;
   font-weight: bold;
@@ -30,10 +30,10 @@ const Burger = styled.div`
     height: 400px;
   }
 
-  @media (min-width: 1000px) and (min-height: 700px) {
+  /* @media (min-width: 1000px) and (min-height: 700px) {
     width: 700px;
     height: 600px;
-  }
+  } */
 `
 // recursive function to add ingredient types into an array
 const addToArray = (igType: ingredientType, num: number, arr: any[]) => {

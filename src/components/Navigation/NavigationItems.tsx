@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 interface INavigationItemsProps {
   active?: boolean
@@ -41,10 +42,14 @@ const NavigationItems: React.SFC<INavigationItemsProps> = props => {
   return (
     <NavWrapper>
       <NavigationItem>
-        <a href="#">Build Burger</a>
+        <NavLink activeStyle={{ color: 'pink' }} style={{ color: 'white', textDecoration: 'none' }} to="/burgerbuilder">
+          Build Burger
+        </NavLink>
       </NavigationItem>
       <NavigationItem>
-        <a href="#">Cart</a>
+        <NavLink activeStyle={{ color: 'pink' }} style={{ color: 'white', textDecoration: 'none' }} to="/orders">
+          Orders
+        </NavLink>
       </NavigationItem>
     </NavWrapper>
   )
