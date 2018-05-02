@@ -1,10 +1,9 @@
 import * as React from 'react'
-import Button from 'material-ui/Button/Button'
 import styled from 'styled-components'
-import { IburgerProps } from '../components/Burger/Burger'
+import { IburgerProps } from '../components/done-Burger/Burger'
 import orderAxios from '../axios-order'
-import { LinearProgress } from 'material-ui/Progress'
 import { RouteComponentProps } from 'react-router-dom'
+import { Progress, Button } from 'antd'
 
 export interface IContactInfoProps {
   totalPrice: number
@@ -28,16 +27,11 @@ const Wrapper = styled.div`
     width: 500px;
   }
 `
-const ProgressBar = styled(LinearProgress).attrs({
-  color: 'secondary'
-})`
-  margin-top: 10px;
-`
 
 export default class ContactInfo extends React.Component<IContactInfoProps & IburgerProps & RouteComponentProps<{}>, IContactInfoState> {
   public state = { name: '', email: '', address: { street: '', postalCode: '' }, loading: false }
 
-  public handlerOrder = (e: React.MouseEvent<HTMLElement>) => {
+  public handlerOrder = (e: React.FormEvent<any>) => {
     this.setState({ loading: true })
     const order = {
       ingredients: this.props.ingredients,
@@ -63,7 +57,7 @@ export default class ContactInfo extends React.Component<IContactInfoProps & Ibu
   public render() {
     return (
       <Wrapper>
-        {this.state.loading && <ProgressBar />}
+        {this.state.loading && <Progress percent={50} status="active" />}
 
         <h4>Enter you contact information</h4>
         <form>
@@ -71,8 +65,8 @@ export default class ContactInfo extends React.Component<IContactInfoProps & Ibu
           <input type="email" name="email" placeholder="Your Email" />
           <input type="text" name="street" placeholder="Street" />
           <input type="text" name="postal" placeholder="Postal Code" />
-          <Button variant="raised" color="secondary" onClick={e => this.handlerOrder(e)}>
-            Order
+          <Button type="danger" onClick={e => this.handlerOrder(e)}>
+            Danger
           </Button>
         </form>
       </Wrapper>

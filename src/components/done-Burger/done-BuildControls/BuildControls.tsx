@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import BuildControl from './BuildControl'
 import { ingredientType } from '../BurgerIngredient'
 import { IBurgerBuilderState } from '../../../containers/BurgerBuilder'
-import Button from 'material-ui/Button'
+import { Button } from 'antd'
 
 interface IbuildControlsProps extends IBurgerBuilderState {
   addIngredient: (igType: ingredientType) => void
@@ -50,7 +50,7 @@ const buildControls: React.SFC<IbuildControlsProps> = props => {
     <MainControls>
       <PriceParagraph>Current Price : ${props.totalPrice.toFixed(2)}</PriceParagraph>
       {createBuildControls(buildContolsData)}
-      <Button variant="raised" size="large" color="secondary" onClick={props.toglePurchase}>
+      <Button type="danger" onClick={props.toglePurchase}>
         ORDER NOW
       </Button>
     </MainControls>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import CheckoutSummary from '../components/Order/CheckoutSummary'
-import { IburgerProps } from '../components/Burger/Burger'
+import { IburgerProps } from '../components/done-Burger/Burger'
 import { RouteComponentProps } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import ContactInfo from './ContactInfor'

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Order from '../components/Order/Order'
 import orderAxios from '../axios-order'
-import { IburgerProps } from '../components/Burger/Burger'
+import { IburgerProps } from '../components/done-Burger/Burger'
 
 export interface IOrdersProps {
   _?: string

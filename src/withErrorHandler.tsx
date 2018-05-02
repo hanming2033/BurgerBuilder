@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Dialog, { DialogActions, DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog'
-import Button from 'material-ui/Button'
 import { AxiosInstance } from 'axios'
+import { notification } from 'antd'
+import { IconType } from 'antd/lib/notification'
 
 interface IwithErrorHandlerState {
   open: boolean
@@ -16,14 +16,12 @@ function withErrorHandler<P>(InnerComponent: React.ComponentType<P>, axios: Axio
     constructor(props: P) {
       super(props)
       this.state = { open: false, error: null }
-      this.reqInterceptor = axios.interceptors.request.use(req => {
-        this.setState({ open: false })
-        return req
-      })
+      this.reqInterceptor = axios.interceptors.request.use(req => req)
       this.resInterceptor = axios.interceptors.response.use(
         res => res,
         err => {
           this.setState({ open: true, error: err.message })
+          this.openNotificationWithIcon('error')
           return Promise.reject(err)
         }
       )
@@ -37,28 +35,17 @@ function withErrorHandler<P>(InnerComponent: React.ComponentType<P>, axios: Axio
     public handleClose = () => {
       this.setState({ open: false })
     }
+
+    public openNotificationWithIcon = (type: IconType) => {
+      notification[type]({
+        message: 'Notification Title',
+        description:
+          'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
+      })
+    }
+
     public render() {
-      return (
-        <>
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle>Something went wrong!</DialogTitle>
-            <DialogContent>
-              <DialogContentText>{this.state.error}</DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Ok
-              </Button>
-            </DialogActions>
-          </Dialog>
-          <InnerComponent {...this.props} />
-        </>
-      )
+      return <div />
     }
   }
 }

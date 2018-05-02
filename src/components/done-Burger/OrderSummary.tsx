@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { IBurgerBuilderState } from '../../containers/BurgerBuilder'
 import styled from 'styled-components'
-import Button from 'material-ui/Button'
-import { LinearProgress } from 'material-ui/Progress'
+import { Progress, Button } from 'antd'
 
 interface IOrderSummaryProps extends IBurgerBuilderState {
   continuePurchase: () => void
@@ -15,12 +14,6 @@ const IngredientListItem = styled.li`
 
 const IngredientName = styled.span`
   text-transform: capitalize;
-`
-
-const ProgressBar = styled(LinearProgress).attrs({
-  color: 'secondary'
-})`
-  margin-top: 10px;
 `
 
 const OrderSummary: React.SFC<IOrderSummaryProps> = props => {
@@ -36,14 +29,14 @@ const OrderSummary: React.SFC<IOrderSummaryProps> = props => {
       <p>A delicious burger with the below ingredients:</p>
       <ul>{ingredientSummary}</ul>
       <p>Continue to Checkout</p>
-      <Button color="primary" onClick={props.cancelPurchase}>
+      <Button type="primary" onClick={props.cancelPurchase}>
         Cancel
       </Button>
-      <Button color="secondary" onClick={props.continuePurchase}>
+      <Button type="danger" onClick={props.continuePurchase}>
         Continue
       </Button>
 
-      {props.loading && <ProgressBar />}
+      {props.loading && <Progress percent={99} status="active" />}
     </>
   )
 }

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Burger, { IburgerProps } from '../Burger/Burger'
-import Button from 'material-ui/Button/Button'
+import Burger, { IburgerProps } from '../done-Burger/Burger'
 import styled from 'styled-components'
+import { Button } from 'antd'
 
 interface ICheckoutSummaryProps {
   cancelCheckout: () => void
@@ -31,10 +31,12 @@ const CheckoutSummary: React.SFC<ICheckoutSummaryProps & IburgerProps> = props =
       <BurgerWrapper>
         <Burger ingredients={props.ingredients} />
       </BurgerWrapper>
-      <Button onClick={props.cancelCheckout} color="primary">
+
+      <Button onClick={props.cancelCheckout} type="primary" ghost>
         CANCEL
       </Button>
-      <Button onClick={props.continueCheckout} color="secondary">
+
+      <Button onClick={props.continueCheckout} type="danger" ghost>
         CONTINUE
       </Button>
     </Wrapper>

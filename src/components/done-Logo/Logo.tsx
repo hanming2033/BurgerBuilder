@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 // BurgerLogo will be a path
-import burgerLogo from '../../assets/images/burger-logo.png'
+import burgerLogo from '../../done-assets/images/burger-logo.png'
 
 interface ILogoProps {
   height?: string

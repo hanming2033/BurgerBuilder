@@ -1,14 +1,14 @@
 import * as React from 'react'
-import Burger from '../components/Burger/Burger'
-import BuilControls from '../components/Burger/BuildControls/BuildControls'
-import { ingredientType } from '../components/Burger/BurgerIngredient'
+import Burger from '../co../components/done-Burger/Burger'
+import BuilControls from '../components/done-Burger/done-BuildControls/BuildControls'
+import { ingredientType } from '../components/done-Burger/BurgerIngredient'
 import Modal from '../UI-Elements/Modal'
-import OrderSummary from '../components/Burger/OrderSummary'
+import OrderSummary from '../components/done-Burger/OrderSummary'
 import orderAxios from '../axios-order'
 import withErrorHandler from '../withErrorHandler'
-import { CircularProgress } from 'material-ui/Progress'
-import { IburgerProps } from '../components/Burger/Burger'
+import { IburgerProps } from '../co../components/done-Burger/Burger'
 import { RouteComponentProps } from 'react-router-dom'
+import { Progress } from 'antd'
 
 export interface IBurgerBuilderProps {
   _?: string
@@ -120,7 +120,7 @@ class BurgerBuilder extends React.Component<IBurgerBuilderProps & RouteComponent
         />
       </>
     )
-    burger = this.state.ingredients.meat === 0 ? <CircularProgress size={50} /> : burger
+    burger = this.state.ingredients.meat === 0 ? <Progress percent={50} status="active" /> : burger
     burger = this.state.error ? <p>App Failed. Mother Fucker!!</p> : burger
 
     return (

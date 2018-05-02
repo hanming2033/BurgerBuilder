@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import TopNav from '../Navigation/TopNav'
-import SideDrawer from '../Navigation/SideDrawer'
+import TopNav from '../done-Navigation/TopNav'
+import SideDrawer from '../done-Navigation/SideDrawer'
 
 const MainContainer = styled.main`
   margin-top: 70px;
@@ -23,8 +23,8 @@ class Layout extends React.Component<{}, ILayoutState> {
   public render() {
     return (
       <>
-        <TopNav openSideMenu={this.toggleSideMenu} />
-        <SideDrawer showMenu={this.state.showSideMenu} closeSideMenu={this.toggleSideMenu} />
+        <TopNav />
+        <SideDrawer />
         <MainContainer>{this.props.children}</MainContainer>
       </>
     )

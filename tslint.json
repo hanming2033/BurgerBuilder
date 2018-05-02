@@ -7,6 +7,8 @@
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "jsx-boolean-value": false,
-    "no-empty-interface": false
+    "no-empty-interface": false,
+    "no-console": false,
+    "jsx-no-lambda": false
   }
 }

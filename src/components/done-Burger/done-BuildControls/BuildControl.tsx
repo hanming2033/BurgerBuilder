@@ -2,8 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { IBurgerBuilderState, MIN_NUMBER, MAX_NUMBER } from '../../../containers/BurgerBuilder'
 import { ingredientType } from '../BurgerIngredient'
-import IconButton from 'material-ui/IconButton'
-import Icon from 'material-ui/Icon'
+import { Button } from 'antd'
 
 interface IbuildControlProps extends Partial<IBurgerBuilderState> {
   label: string
@@ -31,12 +30,12 @@ const buildControl: React.SFC<IbuildControlProps> = props => {
   return (
     <BuildControl>
       <Label>{props.label}</Label>
-      <IconButton onClick={props.removeIngredient} disabled={disableRemove}>
-        <Icon>remove_circle</Icon>
-      </IconButton>
-      <IconButton onClick={props.addIngredient} disabled={disableAdd}>
-        <Icon>add_circle</Icon>
-      </IconButton>
+      <Button shape="circle" onClick={props.removeIngredient} disabled={disableRemove}>
+        -
+      </Button>
+      <Button shape="circle" onClick={props.addIngredient} disabled={disableAdd}>
+        +
+      </Button>
     </BuildControl>
   )
 }
